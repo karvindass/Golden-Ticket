@@ -1,4 +1,6 @@
 import os
+import requests
+import json
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
 
@@ -44,15 +46,21 @@ def sms_reply():
 
     latitude_decimal = latitude_normalizer * float(latitude_degree + (latitude_minute / 60) + (latitude_second / 3600))
     longitude_decimal = longitude_normalizer * float(longitude_degree + (longitude_minute / 60) + (longitude_second / 3600))
-    print("New calculated values", latitude_decimal, longitude_decimal)
+    print("Calculated coordinates", latitude_decimal, longitude_decimal)
 
-    # TODO make http request
+    sun_api_response = requests.get('https://api.sunrise-sunset.org/json', params={'lat':latitude_decimal,'lng':longitude_decimal,'date':'today'})
+    print(sun_api_response.json()["status"])
+
+    sun_data = sun_api_response.json()
+    # print(type(sun_data))
+    sunrise_time = sun_data['results']['sunrise']
+    sunset_time = sun_data['results']['sunset']
+
     # TODO do estimate for golden hour
     # TODO form string to return
     # TODO respond with message
 
-    resp.message("Message receipt confirmed")
-
+    resp.message("Sunrise at " + sunrise_time + " UTC and sunset at " + sunset_time + " UTC")
     return str(resp)
 
 if __name__ == "__main__":
