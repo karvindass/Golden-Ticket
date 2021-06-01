@@ -37,7 +37,7 @@ six==1.10.0
 snowballstemmer==1.2.1
 twilio==6.4.2
 Twisted==17.5.0
-urllib3==1.21.1
+urllib3==1.26.5
 w3lib==1.17.0
 Werkzeug==0.12.2
 zope.interface==4.4.2
