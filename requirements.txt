@@ -36,7 +36,7 @@ service-identity==17.0.0
 six==1.10.0
 snowballstemmer==1.2.1
 twilio==6.4.2
-Twisted==17.5.0
+Twisted==22.10.0
 urllib3==1.21.1
 w3lib==1.17.0
 Werkzeug==0.12.2
